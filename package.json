@@ -6,6 +6,8 @@
   "scripts": {
     "webpack:build": "webpack --progress --color",
     "start": "node server.js",
+    "lint": "eslint src",
+    "lint:fix": "eslint src --fix",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -28,11 +30,14 @@
   "homepage": "https://gitlab.com/rtamura30/simple-kanban#README",
   "devDependencies": {
     "babel-core": "^6.17.0",
+    "babel-eslint": "^7.0.0",
     "babel-loader": "^6.2.5",
     "babel-plugin-transform-object-rest-spread": "^6.16.0",
     "babel-preset-es2015": "^6.16.0",
     "babel-preset-react": "^6.16.0",
     "css-loader": "^0.25.0",
+    "eslint": "^3.8.0",
+    "eslint-plugin-react": "^6.4.1",
     "extract-text-webpack-plugin": "^1.0.1",
     "node-sass": "^3.10.1",
     "react-hot-loader": "^1.3.0",
