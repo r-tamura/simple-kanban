@@ -4,3 +4,9 @@ npm-debug*
 
 # Source map
 *.map
+
+# Bin
+public/
+
+# Editor Settings
+.vscode/
