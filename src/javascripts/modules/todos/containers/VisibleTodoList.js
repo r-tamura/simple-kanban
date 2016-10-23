@@ -1,14 +1,14 @@
 import { connect } from 'react-redux'
-import { TodoActions } from '../model/todos'
 import TodoList from '../components/TodoList'
-import { TodoSelectors } from '../model/todos'
+import * as actions from '../actions'
+import * as selectors from '../selectors'
 
 const mapStateToProps = (state) => ({
-  todos: TodoSelectors.getVisibleTodos(state)
+  todos: selectors.getVisibleTodos(state)
 })
 
 const mapDispatchToProps =  ({
-  onTodoClick: TodoActions.toggleTodo
+  onTodoClick: actions.toggleTodo
 })
 
 const VisibleTodoList = connect(

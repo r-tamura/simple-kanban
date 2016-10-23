@@ -10,21 +10,16 @@ process.env.BABEL_ENV = TARGET;
 module.exports = {
   devtool: "source-map",
   entry: {
-    "bundle.js":[
+    "bundle":[
       'webpack-dev-server/client?http://localhost:3000',
       'webpack/hot/only-dev-server',
-      './src/index'
+      './src/index',
+      './src/style'
     ],
-    "style.css":[
-      'webpack-dev-server/client?http://localhost:3000',
-      'webpack/hot/only-dev-server',
-      "./src/style.js"
-    ]
-  }
-  ,
+  },
   output: {
     path: path.join(__dirname, "/public/"),
-    filename: "[name]",
+    filename: "[name].js",
     publicPath: outputPath
   },
   module: {
@@ -36,13 +31,16 @@ module.exports = {
       },
       {
         test: /\.scss$/,
-        loader: ExtractTextPlugin.extract("style-loader", "css-loader?sourceMap!sass-loader")
+        loader: ExtractTextPlugin.extract(
+          "style",
+          ["css?modules&importLoaders=1&localIdentName=[name]__[local]___[hash:base64:5]&sourceMap", "sass?sourceMap"]
+        )
       }
     ]
   },
   plugins: [
     new webpack.HotModuleReplacementPlugin(),
-    new ExtractTextPlugin("style.css", {allChunks: true})
+    new ExtractTextPlugin("[name].css", {allChunks: true})
   ],
   resolve: {
     extensions: ["", ".js", ".jsx"]

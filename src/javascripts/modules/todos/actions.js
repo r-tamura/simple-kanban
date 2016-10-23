@@ -1,7 +1,10 @@
-let nextTodoId = 0
+import { utils } from '../../common/'
+
+const idGen = utils.indexGenerator()
+
 export const addTodo = (text) => ({
   type: 'ADD_TODO',
-  id: nextTodoId++,
+  id: idGen.next().value,
   text
 })
 

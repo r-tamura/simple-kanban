@@ -1,5 +1,5 @@
 import { connect } from 'react-redux'
-import { TodoActions } from '../model/todos'
+import { TodoActions } from '../modules/todos'
 import Link from '../components/Link'
 
 const mapStateToProps = (state, ownProps) => ({
@@ -12,9 +12,7 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
   }
 })
 
-const FilterLink = connect(
+export default connect(
   mapStateToProps,
   mapDispatchToProps
 )(Link)
-
-export default FilterLink

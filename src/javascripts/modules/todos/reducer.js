@@ -7,7 +7,7 @@ const todo = createReducer({}, {
       id: action.id,
       text: action.text,
       completed: false,
-      createdAt: new Date()
+      //createdAt: new Date()
     }
   },
   TOGGLE_TODO: (state, action) => {
