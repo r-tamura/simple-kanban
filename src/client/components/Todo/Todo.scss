@@ -1,0 +1,21 @@
+.todo {
+  cursor: pointer;
+}
+
+.completed {
+  composes: todo;
+
+  text-decoration: line-through;
+  color: #AAA;
+
+  &:before {
+    content: '\2611 '
+  }
+}
+
+.notCompleted {
+  composes: todo;
+  &:before {
+    content: '\25FB ';
+  }
+}

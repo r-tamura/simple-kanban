@@ -1,48 +1,88 @@
-const path = require("path");
-const webpack = require("webpack");
-const ExtractTextPlugin = require("extract-text-webpack-plugin");
+// Node modules
+const path    = require('path');
 
+// Webpack
+const webpack = require('webpack');
+
+// Constants
+const host = process.env.host || 'localhost';
+const port = (+process.env.port)+1 || '3000';
+
+// Webpack Plugins
+const ExtractTextPlugin     = require('extract-text-webpack-plugin');
+const combineLoaders        = require('webpack-combine-loaders');
+const HtmlWebpackPlugin     = require('html-webpack-plugin');
+
+// Other Settings
 const TARGET = process.env.npm_lifecycle_event;
-
+process.env.BABEL_ENV = TARGET;
 const outputPath = '/public';
 
-process.env.BABEL_ENV = TARGET;
 module.exports = {
-  devtool: "source-map",
+  devtool: 'inline-source-map',
+  context: path.resolve('src'),
   entry: {
-    "bundle":[
-      'webpack-dev-server/client?http://localhost:3000',
+    'bundle':[
+      `webpack-dev-server/client?http://${host}:${port}`,
       'webpack/hot/only-dev-server',
-      './src/index',
-      './src/style'
+      './client',
     ],
   },
   output: {
-    path: path.join(__dirname, "/public/"),
-    filename: "[name].js",
-    publicPath: outputPath
+    path: path.join(__dirname, '/public/'),
+    filename: '[name]-[hash].js',
+    publicPath: '/'
   },
   module: {
     loaders: [
       { 
         test: /\.js|jsx$/, 
         exclude: /node_modules/,
-        loaders: ["react-hot", "babel"] 
+        loaders: ['react-hot', 'babel'] 
       },
       {
-        test: /\.scss$/,
-        loader: ExtractTextPlugin.extract(
-          "style",
-          ["css?modules&importLoaders=1&localIdentName=[name]__[local]___[hash:base64:5]&sourceMap", "sass?sourceMap"]
-        )
+        test: /\.css|scss$/,
+        loader: //ExtractTextPlugin.extract(
+          combineLoaders([{
+            loader:'style'
+          }, {
+            loader: 'css',
+            query: {
+              modules: true,
+              importLoaders: true,
+              localIdentName: '[name]__[local]___[hash:base64:5]',
+              sourceMap: true,
+            }
+          }, {
+            loader: 'sass',
+            query: {
+              sourceMap: true,
+            }
+          }])
+        //)
       }
     ]
   },
+  resolve: {
+    // importで利用されるコンテキストディレクトリの設定
+    modulesDirectories: [
+      'src/client',
+      'node_modules'
+    ],
+    extensions: ['', '.js', '.jsx', 'css', 'scss']
+  },
+  // Loader用
+  resolveLoader: {
+    modulesDirectories: ['node_modules']
+  },
   plugins: [
     new webpack.HotModuleReplacementPlugin(),
-    new ExtractTextPlugin("[name].css", {allChunks: true})
+    //new ExtractTextPlugin('[name]-[hash].css', {allChunks: true}),
+    new HtmlWebpackPlugin({
+      filename: 'index.html',
+      template: path.join(__dirname, 'assets/templates/index.html'),
+      inject: 'body',
+      favicon: path.join(__dirname, 'assets/favicon.ico'),
+    }),
   ],
-  resolve: {
-    extensions: ["", ".js", ".jsx"]
-  }
 };
