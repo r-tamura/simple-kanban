@@ -1,7 +1,7 @@
 /**
  *  Action Types
  */
-export const SET = 'visibilityFilter'
+export const SET = 'visibilityFilter/SET'
 
 /**
  *  Action Creators

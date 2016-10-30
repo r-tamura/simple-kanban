@@ -11,7 +11,7 @@ require('./client/css/kanban.scss')
 
 // Hot Module Replacementが有効な場合にCSSを再リロードする
 if (module.hot) {
-  reloadCSS();
+  reloadCSS()
 }
 
 const store = createStore(rootReducer)

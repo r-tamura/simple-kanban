@@ -1,5 +1,5 @@
 import VisibilityFilterReducer from './reducer'
-import { VisibilityFilterActions } from './actions'
+import * as VisibilityFilterActions from './actions'
 
 export {
   VisibilityFilterReducer,

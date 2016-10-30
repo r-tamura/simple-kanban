@@ -1,17 +1,21 @@
-import { createSelector } from 'reselect';
+import { createSelector } from 'reselect'
 
-const getVisibilityFilter = state => state.visibilityFilter;
-const getTodos = state => state.todos;
+const getVisibilityFilter = state => state.visibilityFilter
+const getTodos = state => state.todos
+
+export const ALL = 'SHOW_ALL'
+export const COMPLETED = 'SHOW_COMPLETED'
+export const ACTIVE = 'SHOW_ACTIVE'
 
 export const getVisibleTodos = createSelector(
   [getVisibilityFilter, getTodos],
   (filter, todos) => {
     switch (filter) {
-    case 'SHOW_ALL':
+    case ALL:
       return todos
-    case 'SHOW_COMPLETED':
+    case COMPLETED:
       return todos.filter(t => t.completed)
-    case 'SHOW_ACTIVE':
+    case ACTIVE:
       return todos.filter(t => !t.completed)
     default:
       throw new Error('Unknown filter: ' + filter)

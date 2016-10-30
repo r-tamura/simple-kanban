@@ -15,6 +15,7 @@ export function* indexGenerator(initialValue = 0, step = 1) {
     i += step
   }
 }
+
 /**
  * 第二引数で指定された桁数だけ"0"埋めを行った文字列を返す
  * @param {number} number 0埋めを行う対象(負の数も対応)
@@ -37,19 +38,18 @@ export function zeroFill(number, numZeros) {
  * @param {string} format 出力フォーマット(デフォルトyyyymmdd)
  * @return {string} 指定されたフォーマットに変換された文字列 
  */
-export function formatDate(date, format= "yyyymmdd hh:MM:ss") {
-    let formatted = "",  fmt = format
-    let year = zeroFill(date.getFullYear(),4)
-    let month = zeroFill(date.getMonth()+1, 2)
-    let dayOfMonth = zeroFill(date.getDate(), 2)
-    let hour = zeroFill(date.getHours(), 2)
-    let min = zeroFill(date.getMinutes(), 2)
-    let sec = zeroFill(date.getSeconds(), 2)
-    return `${year}/${month}/${dayOfMonth} ${hour}:${min}:${sec}`
+export function formatDate(date, format= 'yyyymmdd hh:MM:ss') {
+  const year = zeroFill(date.getFullYear(),4)
+  const month = zeroFill(date.getMonth()+1, 2)
+  const dayOfMonth = zeroFill(date.getDate(), 2)
+  const hour = zeroFill(date.getHours(), 2)
+  const min = zeroFill(date.getMinutes(), 2)
+  const sec = zeroFill(date.getSeconds(), 2)
+  return `${year}/${month}/${dayOfMonth} ${hour}:${min}:${sec}`
 }
 
 
-// ======= React系共通関数 ================================
+// ======= React関連共通関数 ================================
 /**
  * ハンドラーリストからReducerを生成します
  * @params {object} iniState 初期State
@@ -59,9 +59,9 @@ export function formatDate(date, format= "yyyymmdd hh:MM:ss") {
 export const createReducer = (iniState, handlers) => {
   return function reducer(state = iniState, action) {
     if(handlers.hasOwnProperty(action.type)) {
-      return handlers[action.type](state, action);
+      return handlers[action.type](state, action)
     } else {
-      return state;
+      return state
     }
   }
 }

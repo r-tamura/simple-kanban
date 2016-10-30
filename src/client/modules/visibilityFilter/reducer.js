@@ -1,12 +1,13 @@
 import { utils } from 'common'
+import * as t from './actions'
 
 /**
  * Reducer
  */
 const visibilityFilter = utils.createReducer('SHOW_ALL', {
-  SET_VISIBILITY_FILTER: (state, action) => (
-    action.filter
-  )
+  [t.SET]: (state, action) => {
+    return action.filter
+  }
 })
 
 export default visibilityFilter

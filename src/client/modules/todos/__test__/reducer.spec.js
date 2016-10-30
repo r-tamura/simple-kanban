@@ -1,4 +1,5 @@
-import { todos, visibilityFilter } from '../reducer'
+import * as t from '../actions'
+import todos from '../reducer'
 
 describe('todos reducer', () => {
   it('should handle initial state', () => {
@@ -10,7 +11,7 @@ describe('todos reducer', () => {
   it('should handle ADD_TODO', () => {
     expect(
       todos([], {
-        type: 'ADD_TODO',
+        type: t.ADD,
         text: 'Run the tests',
         id: 0
       })
@@ -30,7 +31,7 @@ describe('todos reducer', () => {
           id: 0
         }
       ], {
-        type: 'ADD_TODO',
+        type: t.ADD,
         text: 'Use Redux',
         id: 1
       })
@@ -58,7 +59,7 @@ describe('todos reducer', () => {
           id: 1
         }
       ], {
-        type: 'ADD_TODO',
+        type: t.ADD,
         text: 'Fix the tests',
         id: 2
       })
@@ -92,7 +93,7 @@ describe('todos reducer', () => {
           id: 0
         }
       ], {
-        type: 'TOGGLE_TODO',
+        type: t.TOGGLE,
         id: 1
       })
     ).toEqual([

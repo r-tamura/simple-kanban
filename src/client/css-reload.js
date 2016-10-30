@@ -3,14 +3,14 @@
 export const reloadCSS = () => {
   const onMessage = event => {
     if (typeof event.data === 'string' && event.data.indexOf('webpackHotUpdate') === 0) {
-      console.log('Reloading style sheets...');
+      console.log('Reloading style sheets...')
       Array.from(document.styleSheets).forEach(sheet => {
         if ((sheet.href || '').indexOf('localhost') !== -1) {
-          sheet.ownerNode.href = sheet.href;
+          sheet.ownerNode.href = sheet.href
         }
-      });
+      })
     }
   }
-  window.addEventListener('message', onMessage);
-  window.addEventListener('onmessage', onMessage);
+  window.addEventListener('message', onMessage)
+  window.addEventListener('onmessage', onMessage)
 }

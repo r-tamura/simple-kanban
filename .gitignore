@@ -10,3 +10,6 @@ public/
 
 # Editor Settings
 .vscode/
+
+# jest
+coverage/
