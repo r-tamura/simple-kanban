@@ -1,9 +1,14 @@
-import TodoReducer from './reducer'
+import { todos, visibilityFilter } from './reducer'
 import * as TodoActions from './actions'
-import * as TodoSelectors from './selectors'
+import { getVisibleTodos, isActive } from './selectors'
 
 export {
-  TodoReducer,
+  // Reducers
+  visibilityFilter,
+  todos,
+  // Actions
   TodoActions,
-  TodoSelectors,
+  // Selectors
+  getVisibleTodos,
+  isActive,
 }

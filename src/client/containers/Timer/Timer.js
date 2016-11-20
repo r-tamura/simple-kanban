@@ -4,7 +4,7 @@ import { Timer } from 'components'
 class RealTimer extends React.Component {
 
   componentDidMount() {
-    this.timer = setInterval(()=>this.forceUpdate(), 1000)
+    this.timer = setInterval(() => this.forceUpdate(), 1000)
   }
 
   componentWillUnmount() {

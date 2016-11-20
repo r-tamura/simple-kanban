@@ -13,3 +13,4 @@ public/
 
 # jest
 coverage/
+*.snap

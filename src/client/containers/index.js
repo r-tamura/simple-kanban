@@ -6,5 +6,5 @@ import FilterLink from './FilterLink/FilterLink'
 import Footer from './Footer/Footer'
 
 export {
-  App, Timer, AddTodo, VisibleTodoList, FilterLink, Footer
+  App, Timer, AddTodo, VisibleTodoList, FilterLink, Footer,
 }

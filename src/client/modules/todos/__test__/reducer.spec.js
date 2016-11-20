@@ -1,5 +1,5 @@
 import * as t from '../actions'
-import todos from '../reducer'
+import { todos, visibilityFilter } from '../reducer'
 
 describe('todos reducer', () => {
   it('should handle initial state', () => {
@@ -13,14 +13,14 @@ describe('todos reducer', () => {
       todos([], {
         type: t.ADD,
         text: 'Run the tests',
-        id: 0
+        id: 0,
       })
     ).toEqual([
       {
         text: 'Run the tests',
         completed: false,
-        id: 0
-      }
+        id: 0,
+      },
     ])
 
     expect(
@@ -28,23 +28,23 @@ describe('todos reducer', () => {
         {
           text: 'Run the tests',
           completed: false,
-          id: 0
-        }
+          id: 0,
+        },
       ], {
         type: t.ADD,
         text: 'Use Redux',
-        id: 1
+        id: 1,
       })
     ).toEqual([
       {
         text: 'Run the tests',
         completed: false,
-        id: 0
+        id: 0,
       }, {
         text: 'Use Redux',
         completed: false,
-        id: 1
-      }
+        id: 1,
+      },
     ])
 
     expect(
@@ -52,31 +52,31 @@ describe('todos reducer', () => {
         {
           text: 'Run the tests',
           completed: false,
-          id: 0
+          id: 0,
         }, {
           text: 'Use Redux',
           completed: false,
-          id: 1
-        }
+          id: 1,
+        },
       ], {
         type: t.ADD,
         text: 'Fix the tests',
-        id: 2
+        id: 2,
       })
     ).toEqual([
       {
         text: 'Run the tests',
         completed: false,
-        id: 0
+        id: 0,
       }, {
         text: 'Use Redux',
         completed: false,
-        id: 1
+        id: 1,
       }, {
         text: 'Fix the tests',
         completed: false,
-        id: 2
-      }
+        id: 2,
+      },
     ])
   })
 
@@ -86,27 +86,31 @@ describe('todos reducer', () => {
         {
           text: 'Run the tests',
           completed: false,
-          id: 1
+          id: 1,
         }, {
           text: 'Use Redux',
           completed: false,
-          id: 0
-        }
+          id: 0,
+        },
       ], {
         type: t.TOGGLE,
-        id: 1
+        id: 1,
       })
     ).toEqual([
       {
         text: 'Run the tests',
         completed: true,
-        id: 1
+        id: 1,
       }, {
         text: 'Use Redux',
         completed: false,
-        id: 0
-      }
+        id: 0,
+      },
     ])
   })
+})
+
+
+describe('visibilityFilter', () => {
 
 })

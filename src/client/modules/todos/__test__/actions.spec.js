@@ -5,14 +5,14 @@ describe('todo actions', () => {
     expect(actions.addTodo('Use Redux')).toEqual({
       type: actions.ADD,
       id: 0,
-      text: 'Use Redux'
+      text: 'Use Redux',
     })
   })
 
   it('toggleTodo should create TOGGLE_TODO action', () => {
     expect(actions.toggleTodo(1)).toEqual({
       type: actions.TOGGLE,
-      id: 1
+      id: 1,
     })
   })
 })

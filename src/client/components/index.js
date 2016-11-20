@@ -4,5 +4,5 @@ import Todo from './Todo/Todo'
 import TodoList from './TodoList/TodoList'
 
 export {
-  Timer, Link, Todo, TodoList
+  Timer, Link, Todo, TodoList,
 }

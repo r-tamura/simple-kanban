@@ -1,13 +1,17 @@
-import React from 'react'
+import React, { PropTypes } from 'react'
 import { utils } from 'common'
 import styles from './Timer.scss'
 
 const Timer = ({
-  date
+  date,
 }) => (
   <div className={styles.default}>
     現在時刻は{` ${utils.formatDate(date)} `}です
   </div>
 )
+
+Timer.propTypes = {
+  date: PropTypes.object.isRequired,
+}
 
 export default Timer

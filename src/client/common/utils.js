@@ -10,7 +10,7 @@
  */
 export function* indexGenerator(initialValue = 0, step = 1) {
   let i = initialValue
-  while(true) {
+  while (true) {
     yield i
     i += step
   }
@@ -23,11 +23,11 @@ export function* indexGenerator(initialValue = 0, step = 1) {
  * @return {string} 0埋めされた文字列
  */
 export function zeroFill(number, numZeros) {
-  var n = Math.abs(number)
-  var zeros = Math.max(0, numZeros - Math.floor(n).toString().length )
-  var zeroString = Math.pow(10, zeros).toString().slice(1)
-  if( number < 0 ) {
-    zeroString = '-' + zeroString
+  const n = Math.abs(number)
+  const zeros = Math.max(0, numZeros - Math.floor(n).toString().length)
+  let zeroString = Math.pow(10, zeros).toString().slice(1)
+  if (number < 0) {
+    zeroString = `-${zeroString}`
   }
   return zeroString + n
 }
@@ -36,11 +36,11 @@ export function zeroFill(number, numZeros) {
  * 日付を指定されたフォーマットの文字列に変換します(yyyymmddのみ実装)
  * @param {Date} date 日付
  * @param {string} format 出力フォーマット(デフォルトyyyymmdd)
- * @return {string} 指定されたフォーマットに変換された文字列 
+ * @return {string} 指定されたフォーマットに変換された文字列
  */
-export function formatDate(date, format= 'yyyymmdd hh:MM:ss') {
-  const year = zeroFill(date.getFullYear(),4)
-  const month = zeroFill(date.getMonth()+1, 2)
+export function formatDate(date, format = 'yyyymmdd hh:MM:ss') {
+  const year = zeroFill(date.getFullYear(), 4)
+  const month = zeroFill(date.getMonth() + 1, 2)
   const dayOfMonth = zeroFill(date.getDate(), 2)
   const hour = zeroFill(date.getHours(), 2)
   const min = zeroFill(date.getMinutes(), 2)
@@ -56,12 +56,11 @@ export function formatDate(date, format= 'yyyymmdd hh:MM:ss') {
  * @params {array<function>} handlers State更新処理リスト
  * @returns {function} Reducer関数
  */
-export const createReducer = (iniState, handlers) => {
-  return function reducer(state = iniState, action) {
-    if(handlers.hasOwnProperty(action.type)) {
+export const createReducer = (iniState, handlers) => (
+  function reducer(state = iniState, action) {
+    if (handlers.hasOwnProperty(action.type)) {
       return handlers[action.type](state, action)
-    } else {
-      return state
     }
+    return state
   }
-}
+)

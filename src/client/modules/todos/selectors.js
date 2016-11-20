@@ -1,11 +1,13 @@
 import { createSelector } from 'reselect'
 
-const getVisibilityFilter = state => state.visibilityFilter
-const getTodos = state => state.todos
 
 export const ALL = 'SHOW_ALL'
 export const COMPLETED = 'SHOW_COMPLETED'
 export const ACTIVE = 'SHOW_ACTIVE'
+
+const getVisibilityFilter = state => state.visibilityFilter
+const getTodos = state => state.todos
+const getPropsFilter = (_, props) => props.filter
 
 export const getVisibleTodos = createSelector(
   [getVisibilityFilter, getTodos],
@@ -18,7 +20,16 @@ export const getVisibleTodos = createSelector(
     case ACTIVE:
       return todos.filter(t => !t.completed)
     default:
-      throw new Error('Unknown filter: ' + filter)
+      throw new Error(`Unknown filter: ${filter}`)
     }
   }
+)
+
+/**
+ * フィルターが選択されているかを取得します
+ * @returns { boolean } true: 選択されている / false: 選択されていない
+ */
+export const isActive = createSelector(
+  [getVisibilityFilter, getPropsFilter],
+  (stateFilter, propsFilter) => stateFilter === propsFilter
 )
