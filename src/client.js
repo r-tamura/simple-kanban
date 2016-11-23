@@ -1,10 +1,8 @@
-import 'babel-polyfill'
+/* eslint global-require: "off" */
 import React from 'react'
 import { render } from 'react-dom'
-import { createStore } from 'redux'
-import { Provider } from 'react-redux'
-import { App } from 'containers'
-import { rootReducer } from 'modules'
+import configureStore from 'store'
+import { Root } from 'containers'
 import { reloadCSS } from 'css-reload'
 
 require('./client/css/kanban.scss')
@@ -14,22 +12,9 @@ if (module.hot) {
   reloadCSS()
 }
 
-const store = createStore(rootReducer)
+const store = configureStore()
 render(
-  <Provider store={store}>
-    <App />
-  </Provider>,
+  <Root store={store} />,
   document.getElementById('root')
 )
 
-if (module.hot) {
-  module.hot.accept('./client/containers/App/App.js', () => {
-    const NextApp = require('./client/containers/App/App.js')
-
-    render(
-      <Provider store={store}>
-        <NextApp />
-      </Provider>,
-      document.getElementById('react-root'))
-  })
-}
