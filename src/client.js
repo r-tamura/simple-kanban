@@ -21,3 +21,15 @@ render(
   </Provider>,
   document.getElementById('root')
 )
+
+if (module.hot) {
+  module.hot.accept('./client/containers/App/App.js', () => {
+    const NextApp = require('./client/containers/App/App.js')
+
+    render(
+      <Provider store={store}>
+        <NextApp />
+      </Provider>,
+      document.getElementById('react-root'))
+  })
+}

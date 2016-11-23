@@ -1,14 +1,54 @@
-const webpack = require("webpack");
-const WebpackDevserver = require("webpack-dev-server");
-const config = require("./webpack.config");
+import express from 'express'
+import webpack from 'webpack'
+import WebpackDevserver from 'webpack-dev-server'
+// import webpackDevMiddleware from 'webpack-dev-middleware'
+// import webpackHotMiddleware from 'webpack-hot-middleware'
+import { spawn } from 'child_process'
 
-new WebpackDevserver(webpack(config), {
+import config from './webpack/webpack.config.development'
+
+const argv = require('minimist')(process.argv.slice(2))
+
+const app = express()
+const compiler = webpack(config)
+const PORT = process.env.PORT || 3000
+
+// const wdm = webpackDevMiddleware(compiler, {
+//   publicPath: config.output.publicPath,
+//   stats: {
+//     colors: true
+//   }
+// })
+
+const wds = new WebpackDevserver(webpack(config), {
   publicPath: config.output.publicPath,
   hot: true,
-  historyApiFallback: true
-}).listen(3000, "localhost", function(err, result) {
-  if(err) {
-    return console.log(err);
+  historyApiFallback: true,
+  stats: { colors: true },
+})
+
+// app.use(wds)
+
+// app.use(webpackHotMiddleware(compiler))
+
+const server = wds.listen(PORT, 'localhost', (serverError) => {
+  if (serverError) {
+    return console.error(serverError)
   }
-  console.log("Listening at http://localhost:3000/");
-});
+
+  if (argv['start-hot']) {
+    spawn('npm', ['run', 'start-hot'], { shell: true, env: process.env, stdio: 'inherit' })
+      .on('close', code => process.exit(code))
+      .on('error', spawnError => console.error(spawnError))
+  }
+
+  console.log(`Listening at http://localhost:${PORT}`)
+})
+
+process.on('SIGTERM', () => {
+  console.log('Stopping dev server')
+  wds.close()
+  server.close(() => {
+    process.exit(0)
+  })
+})
