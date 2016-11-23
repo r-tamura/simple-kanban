@@ -1,16 +1,19 @@
 import React, { PropTypes } from 'react'
 import { connect } from 'react-redux'
 import { TodoActions } from 'modules/todos'
+import RaisedButton from 'material-ui/RaisedButton'
+import TextField from 'material-ui/TextField'
 
 let AddTodo = ({
   onSubmit,
 }) => {
-  let input
+  let textField
 
   return (
     <div>
       <form
         onSubmit={(e) => {
+          const input = textField.getInputNode()
           e.preventDefault()
           if (!input.value.trim()) {
             return
@@ -19,14 +22,13 @@ let AddTodo = ({
           input.value = ''
         }}
       >
-        <input
-          ref={(node) => {
-            input = node
-          }}
+        <TextField
+          name="add-todo"
+          ref={ref => (textField = ref)}
         />
-        <button type="submit">
+        <RaisedButton type="submit">
           Add Todo
-        </button>
+        </RaisedButton>
       </form>
     </div>
   )

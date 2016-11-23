@@ -8,6 +8,16 @@ import {
   dependencies as externals,
 } from '../package.json'
 
+// react-15.3.2系ではEvent系がreactディレクトリにあるのでパスをaliasで変更
+// http://stackoverflow.com/questions/40670018/error-in-react-tap-event-plugin-src-injecttapeventplugin-js
+// とは逆の対応
+// react-hot-loader@3.x系でhot-replacementができるようになるまで(?)
+const alias = ['EventPluginHub', 'EventConstants', 'EventPluginUtils', 'EventPropagators',
+ 'SyntheticUIEvent', 'CSSPropertyOperations', 'ViewportMetrics'].reduce((carry, filename) => ({
+   ...carry,
+   [`react-dom/lib/${filename}`]: path.join(__dirname, '../node_modules/react/lib', filename),
+ }), {})
+
 export default validate({
   context: path.resolve(__dirname, '..'),
   module: {
@@ -38,6 +48,7 @@ export default validate({
     ],
     extensions: ['', '.js', '.jsx', '.json'],
     packageMains: ['webpack', 'browser', 'web', 'browserify', ['jam', 'main'], 'main'],
+    alias,
   },
 
   plugins: [],
