@@ -1,8 +1,8 @@
 import Timer from './Timer/Timer'
 import Link from './Link/Link'
-import Todo from './Todo/Todo'
-import TodoList from './TodoList/TodoList'
+import Card from './Card/Card'
+import CardList from './CardList/CardList'
 
 export {
-  Timer, Link, Todo, TodoList,
+  Timer, Link, Card, CardList,
 }

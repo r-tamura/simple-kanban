@@ -101,6 +101,10 @@
       "src/client",
       "node_modules"
     ],
+    "testPathIgnorePatterns": [
+      "/node_moules/",
+      "/webpack/"
+    ],
     "moduleNameMapper": {
       "^.+\\.(css|scss)$": "identity-obj-proxy"
     }

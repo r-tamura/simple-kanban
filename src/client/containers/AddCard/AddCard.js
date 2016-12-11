@@ -1,10 +1,9 @@
 import React, { PropTypes } from 'react'
 import { connect } from 'react-redux'
-import { TodoActions } from 'modules/todos'
 import RaisedButton from 'material-ui/RaisedButton'
 import TextField from 'material-ui/TextField'
 
-let AddTodo = ({
+export const AddCard = ({
   onSubmit,
 }) => {
   let textField
@@ -27,24 +26,24 @@ let AddTodo = ({
           ref={ref => (textField = ref)}
         />
         <RaisedButton type="submit">
-          Add Todo
+          Add Card
         </RaisedButton>
       </form>
     </div>
   )
 }
 
-AddTodo.propTypes = {
+AddCard.propTypes = {
   onSubmit: PropTypes.func.isRequired,
 }
 
-AddTodo = connect(
-  () => ({}),
-  (dispatch, owonProps) => ({
-    onSubmit(todoTitle) {
-      dispatch(TodoActions.addTodo(todoTitle))
-    },
-  })
-)(AddTodo)
+// AddCard = connect(
+//   null,
+//   (dispatch, owonProps) => ({
+//     onSubmit(title) {
+//       dispatch(CardActions.addCard(title))
+//     },
+//   })
+// )(AddCard)
 
-export default AddTodo
+export default AddCard

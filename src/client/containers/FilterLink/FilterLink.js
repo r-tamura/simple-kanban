@@ -1,6 +1,6 @@
 import React, { PropTypes } from 'react'
 import { connect } from 'react-redux'
-import { TodoActions, isActive } from 'modules/todos'
+import { setVisibilityFilter, isActive } from 'modules'
 import { Link } from 'components'
 
 export const FilterLink = ({
@@ -28,7 +28,7 @@ const mapStateToProps = (state, ownProps) => ({
 
 const mapDispatchToProps = (dispatch, ownProps) => ({
   onClick() {
-    dispatch(TodoActions.setVisibilityFilter(ownProps.filter))
+    dispatch(setVisibilityFilter(ownProps.filter))
   },
 })
 

@@ -1,7 +1,7 @@
 import React, { PropTypes } from 'react'
-import styles from './Todo.scss'
+import styles from './Card.scss'
 
-const Todo = ({ onClick, completed, text }) => (
+const Card = ({ onClick, completed, text }) => (
   <li
     onClick={onClick}
     className={completed ? styles.completed : styles.notCompleted}
@@ -10,10 +10,10 @@ const Todo = ({ onClick, completed, text }) => (
   </li>
 )
 
-Todo.propTypes = {
+Card.propTypes = {
   onClick: PropTypes.func.isRequired,
   completed: PropTypes.bool.isRequired,
   text: PropTypes.string.isRequired,
 }
 
-export default Todo
+export default Card
