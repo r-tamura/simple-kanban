@@ -8,9 +8,11 @@ import cards, {
 
 describe('card actions', () => {
   it('addCard should create ADD_CARD action', () => {
-    expect(addCard('Use Redux')).toEqual({
+    expect(addCard(10, 20, 'Use Redux')).toEqual({
       type: ADD,
-      id: 0,
+      cardId: 0,
+      boardId: 10,
+      laneId: 20,
       text: 'Use Redux',
     })
   })
@@ -199,5 +201,3 @@ describe('test cards\' selectors', () => {
     ])
   })
 })
-
-

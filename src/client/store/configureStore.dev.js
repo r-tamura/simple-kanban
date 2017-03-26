@@ -1,24 +1,34 @@
 /* eslint global-require: "off" */
-import { createStore, compose } from 'redux'
-import { persistState } from 'redux-devtools'
-import { DevTools } from 'containers'
-import { rootReducer } from 'modules'
+import { applyMiddleware, createStore, compose } from 'redux'
+// import { persistState } from 'redux-devtools'
+import createLogger from 'redux-logger'
+// import { DevTools } from 'containers'
+import { rootReducer as reducer } from 'modules'
+
+// Loggerインスタンス生成
+// Log level: consoleに表示されるログレベルはinfo
+// collapsed: ログ折り畳みON
+const logger = createLogger({
+  level: 'info',
+  collapsed: true,
+})
 
 const enhancer = compose(
-  DevTools.instrument(),
-  persistState(
-    window.location.href.match(
-      /[?&]debug_session=(^&#]+)\b/
-    ),
-  )
+  applyMiddleware(logger),
+  // DevTools.instrument(),
+  // persistState(
+  //   window.location.href.match(
+  //     /[?&]debug_session=(^&#]+)\b/
+  //   ),
+  // )
 )
 
-export default function configureStore(initialState) {
-  const store = createStore(rootReducer, initialState, enhancer)
+export default function configureStore(preloadedState) {
+  const store = createStore(reducer, preloadedState, enhancer)
 
   if (module.hot) {
     module.hot.accept('modules', () =>
-      store.replaceReducer(require('modules').rootReducer)
+      store.replaceReducer(require('modules').reducer)
     )
   }
 

@@ -1,5 +1,5 @@
 import React, { PropTypes } from 'react'
-import styles from './Card.scss'
+import styles from './Card.css'
 
 const Card = ({ onClick, completed, text }) => (
   <li

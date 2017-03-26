@@ -1,0 +1,16 @@
+/**
+ * Root styles
+ */
+:root {
+  font-family: Helvetica Neue,Hiragino Kaku Gothic ProN,"メイリオ",meiryo,sans-serif;
+  background: #fafafa;
+}
+
+ul, ol {
+  margin: 0;
+  padding: 0;
+}
+
+li {
+  list-style: none;
+}

@@ -2,8 +2,8 @@
   "presets": [ "es2015", "stage-0", "react" ],
   "plugins": [
     /* ES2015では定義されていない Object Rest Spread 用*/
-    "transform-object-rest-spread"
+    "transform-object-rest-spread",
     /* react-hot-loader 3.x では必要 */
-    /* "react-hot-loader/babel" */
+    "react-hot-loader/babel"
   ]
 }

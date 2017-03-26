@@ -11,7 +11,7 @@ export const DELETE = 'lanes/DELETE'
 export const SET_FILTER = 'lanes/SetFilter'
 export const ATTACH_CARD = 'lanes/ATTACH_CARD'
 
-const idGen = utils.indexGenerator()
+const idGen = utils.idGenerator()
 
 export const attachCard = (laneId, cardId) => ({
   type: ATTACH_CARD,
@@ -40,7 +40,8 @@ const initialLaneState = {
 }
 const lane = (state = initialLaneState, action) => {
   switch (action.type) {
-  case ATTACH_CARD: {
+  case ATTACH_CARD:
+  case FromCards.CREATE: {
     const { cardId } = action
     const nextState = { ...state }
     nextState.cards = [
@@ -62,7 +63,8 @@ const initialLanes = {
 const byId = (state = initialLanes.byId, action) => {
   switch (action.type) {
   case CREATE:
-  case ATTACH_CARD: {
+  case ATTACH_CARD:
+  case FromCards.CREATE: {
     const { laneId } = action
     return {
       ...state,

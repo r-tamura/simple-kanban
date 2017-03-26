@@ -4,14 +4,14 @@
     <meta charset="utf-8">
     <title>Simple Todo</title>
     <script>
-      (function() {
-        if (!process.env.HOT) {
-          const link = document.createElement('link');
-          link.rel = 'stylesheet';
-          link.href = './dist/style.css';
-          document.write(link.outerHTML);
-        }
-      }());
+    {
+      if (!process.env.HOT) {
+        const link = document.createElement('link');
+        link.rel = 'stylesheet';
+        link.href = './dist/style.css';
+        document.head.appendChild(link);
+      }
+    }
     </script>
   </head>
   <body>
@@ -19,11 +19,11 @@
     <script>
       {
         const script = document.createElement('script');
-        const port = process.env.PORT || 3000;
+        const port = process.env.PORT || 8080;
         script.src = (process.env.HOT)
           ? 'http://localhost:' + port + '/dist/bundle.js'
           : './dist/bundle.js';
-        document.write(script.outerHTML);
+        document.body.appendChild(script);
       }
     </script>
   </body>

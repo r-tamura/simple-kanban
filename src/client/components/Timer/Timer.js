@@ -1,6 +1,6 @@
 import React, { PropTypes } from 'react'
 import { utils } from 'common'
-import styles from './Timer.scss'
+import styles from './Timer.css'
 
 const Timer = ({
   date,

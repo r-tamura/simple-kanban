@@ -1,9 +1,8 @@
+// @flow
 import { combineReducers } from 'redux'
 import { createSelector } from 'reselect'
 import { utils } from 'common'
 import card from './card'
-
-const cardIdGen = utils.indexGenerator(10000)
 
 /**
  * Action Types
@@ -11,17 +10,29 @@ const cardIdGen = utils.indexGenerator(10000)
 export const CREATE = 'cards/CREATE'
 export const TOGGLE = 'cards/TOGGLE'
 
-export const createCard = ({
-  text,
-}) => ({
+/**
+ * Actions
+ */
+const cardIdGen = utils.idGenerator()
+
+/**
+ * 新規カード追加アクション
+ * @param {number} boardId Board ID
+ * @param {number} laneId Lane ID
+ * @param {string} text カードテキスト
+ * @return {TypeCreateCardAction}
+ */
+export const createCard = (boardId: number, laneId: number, text: string) => ({
   type: CREATE,
-  id: cardIdGen.next().value,
+  cardId: cardIdGen.next().value,
+  boardId,
+  laneId,
   text,
 })
 
-export const toggleCard = id => ({
+export const toggleCard = cardId => ({
   type: TOGGLE,
-  id,
+  cardId,
 })
 
 /**
@@ -33,7 +44,7 @@ const byId = (state = {}, action) => {
   case TOGGLE:
     return {
       ...state,
-      [action.id]: card(state[action.id], action),
+      [action.cardId]: card(state[action.cardId], action),
     }
   default:
     return state
@@ -45,7 +56,7 @@ const allIds = (state = [], action) => {
   case CREATE:
     return [
       ...state,
-      action.id,
+      action.cardId,
     ]
   default:
     return state

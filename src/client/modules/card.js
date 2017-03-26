@@ -4,13 +4,13 @@ const card = (state = {}, action) => {
   switch (action.type) {
   case CREATE: {
     return {
-      id: action.id,
+      id: action.cardId,
       text: action.text,
       completed: false,
     }
   }
   case TOGGLE: {
-    if (state.id !== action.id) {
+    if (state.id !== action.cardId) {
       return state
     }
     return {

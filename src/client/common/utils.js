@@ -4,15 +4,13 @@
 
 /**
  * 指定された初期値から数値を第二引数で指定された値ずつ加算した値を取得するジェネレータ
- * @params {number} initialValue 初期値 (デフォルト: 0)
- * @params {number} step 次のインデックスへ加算する値(デフォルト：1)
  * @yield {number} 次のインデックス
  */
-export function* indexGenerator(initialValue = 0, step = 1) {
-  let i = initialValue
-  while (true) {
-    yield i
-    i += step
+export function idGenerator(initialValue = 0, step = 1) {
+  return {
+    next() {
+      return { value: parseInt(Math.random() * 100, 10) }
+    },
   }
 }
 

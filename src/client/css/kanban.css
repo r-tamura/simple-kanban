@@ -1,0 +1,6 @@
+/* normalize default styles*/
+@import './normalize.css';
+/* Common core variables */
+@import './kanban/variables.css';
+/*  Mixins */
+/* @import 'kanban/mixins'; */
